@@ -10,11 +10,15 @@ public class PlayerControl : MonoBehaviour
      public GameObject lightningObject;
      public TMPro.TMP_Text TextLight;
      public int LightMax;
+     public int LightUpgradeMax = 5;
+     public int LightUpgradeCostAdd = 1;
      private int LightHave;
      public int coolDownLevel;
+     public int coolDownUpgradeMax = 10;
+     public int coolDownUpgradeCostAdd = 1;
      public float coolDownStart;
      
-     public float Cooldown;
+     private float Cooldown;
      
      private float CountCooldown;
     public GameObject upgradeCoolDownButtonText;
@@ -51,8 +55,8 @@ public class PlayerControl : MonoBehaviour
             LightHave = LightMax;
             initialCamera = Camera.main.orthographicSize;
 
-            upgradeCoolDownButtonText.GetComponent<TMPro.TMP_Text>().text = "Cooldown("+this.coolDownLevel.ToString()+")";
-            upgradeLightningButtonText.GetComponent<TMPro.TMP_Text>().text = "Lightning("+ this.LightMax.ToString()+")";
+            upgradeCoolDownButtonText.GetComponent<TMPro.TMP_Text>().text = "Cooldown("+(this.coolDownLevel+ this.coolDownUpgradeCostAdd).ToString()+")";
+            upgradeLightningButtonText.GetComponent<TMPro.TMP_Text>().text = "Lightning("+ (this.LightMax+ this.LightUpgradeCostAdd ).ToString()+")";
     
         }
     }
@@ -131,14 +135,14 @@ public class PlayerControl : MonoBehaviour
     public void upgradeCoolDown()
     {
 
-        if(Global.score > coolDownLevel)
+        if((Global.score > coolDownLevel + this.coolDownUpgradeCostAdd)&&(coolDownLevel <= this.coolDownUpgradeMax))
         {
-            Global.score -= this.coolDownLevel;
+            Global.score -= (this.coolDownLevel+ this.coolDownUpgradeCostAdd);
             coolDownLevel +=1;
             Cooldown = coolDownStart/(float)coolDownLevel;
             strBuild.Clear();
             strBuild.Append("Cooldown(");
-            strBuild.Append(coolDownLevel);
+            strBuild.Append(this.coolDownLevel+ this.coolDownUpgradeCostAdd);
             strBuild.Append(")");
             upgradeCoolDownButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
         }
@@ -146,14 +150,14 @@ public class PlayerControl : MonoBehaviour
 
     public void upgradeLightning()
     {
-        if(Global.score > this.LightMax )
+        if((Global.score > this.LightMax + this.LightUpgradeCostAdd)&&(this.LightMax <= this.LightUpgradeMax))
         {
             
-            Global.score -= this.LightMax-2;
+            Global.score -= (this.LightMax+this.LightUpgradeCostAdd);
             LightMax +=1;
             strBuild.Clear();
             strBuild.Append("Lightning(");
-            strBuild.Append(this.LightMax);
+            strBuild.Append(this.LightMax + this.LightUpgradeCostAdd);
             strBuild.Append(")");
             upgradeLightningButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
         }
