@@ -111,7 +111,7 @@ public class HouseScript : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(5,15));
         setHaveTV();
         // random setup arrester
-        if(Random.value<0.03f)
+        if(Random.value<0.30f)
         {
             arresterTransform.gameObject.SetActive(true);
             haveArrester = true;
