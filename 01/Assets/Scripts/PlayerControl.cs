@@ -134,17 +134,24 @@ public class PlayerControl : MonoBehaviour
 #region GUIEvent
     public void upgradeCoolDown()
     {
-
         if((Global.score > coolDownLevel + this.coolDownUpgradeCostAdd)&&(coolDownLevel <= this.coolDownUpgradeMax))
         {
             Global.score -= (this.coolDownLevel+ this.coolDownUpgradeCostAdd);
             coolDownLevel +=1;
             Cooldown = coolDownStart/(float)coolDownLevel;
-            strBuild.Clear();
-            strBuild.Append("Cooldown(");
-            strBuild.Append(this.coolDownLevel+ this.coolDownUpgradeCostAdd);
-            strBuild.Append(")");
-            upgradeCoolDownButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
+            if(coolDownLevel <= this.coolDownUpgradeMax)
+            {
+                strBuild.Clear();
+                strBuild.Append("Cooldown(");
+                strBuild.Append(this.coolDownLevel+ this.coolDownUpgradeCostAdd);
+                strBuild.Append(")");
+                upgradeCoolDownButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
+            }else
+            {
+                strBuild.Clear();
+                strBuild.Append("Cooldown(max)");
+                upgradeCoolDownButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
+            }
         }
     }
 
@@ -152,14 +159,21 @@ public class PlayerControl : MonoBehaviour
     {
         if((Global.score > this.LightMax + this.LightUpgradeCostAdd)&&(this.LightMax <= this.LightUpgradeMax))
         {
-            
             Global.score -= (this.LightMax+this.LightUpgradeCostAdd);
             LightMax +=1;
-            strBuild.Clear();
-            strBuild.Append("Lightning(");
-            strBuild.Append(this.LightMax + this.LightUpgradeCostAdd);
-            strBuild.Append(")");
-            upgradeLightningButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
+            if(LightMax <= this.LightUpgradeMax)
+            {
+                strBuild.Clear();
+                strBuild.Append("Lightning(");
+                strBuild.Append(this.LightMax + this.LightUpgradeCostAdd);
+                strBuild.Append(")");
+                upgradeLightningButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
+            }else
+            {
+                strBuild.Clear();
+                strBuild.Append("Lightning(max)");
+                upgradeLightningButtonText.GetComponent<TMPro.TMP_Text>().text = strBuild.ToString();
+            }
         }
     }
 #endregion
