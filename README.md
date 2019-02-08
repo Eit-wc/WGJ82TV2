@@ -14,4 +14,8 @@ This is a game about being an angry cloud that tries to destroy TVs by using the
 
 -Nature pack from Kenney (https://www.kenney.nl/)
 
+#Software
+
+ -Unity3D 2018.3.4
+
 
