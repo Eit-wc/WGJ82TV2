@@ -2,7 +2,7 @@
 
 This is a game about being an angry cloud that tries to destroy TVs by using the lightning. This project is my first game jam. It made for Weekly game jam 82: TV, we just try to finish something.
 
-# You can play on itch.io
+# Play on itch.io
 https://eit-wc.itch.io/blast-tvs
 
 # How to play:
